@@ -41,7 +41,7 @@ export default function Login() {
                             }}
                             // Disabling oneTap temporarily to resolve (blocked:other) error
                             // useOneTap
-                            ux_mode="redirect"
+                            // ux_mode="redirect"
                             theme="filled_black"
                             shape="pill"
                             width="340"
