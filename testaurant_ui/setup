@@ -1,4 +1,0 @@
-cd testaurant_ui
-npm install
-cp .env.example .env
-npm run dev

@@ -31,18 +31,11 @@ An automated testing platform for backend services with multi-organization RBAC 
 
 ```bash
 cd testaurant_bff
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3.11 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env
 uvicorn app.main:app --reload --port 8080
-```
-
-### Frontend Setup
-
-```bash
-cd testaurant_ui
-npm install
-npm run dev
 ```
 
 ### Docker Setup

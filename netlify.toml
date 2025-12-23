@@ -1,15 +1,12 @@
 [build]
-  base = "testaurant_ui"
-  command = "npm install && npm run build"
-  publish = "dist"
+  command = "cd testaurant_ui && npm install && npm run build"
+  publish = "testaurant_ui/dist"
 
 [build.environment]
   NODE_VERSION = "20"
   PYTHON_VERSION = "3.11"
   SECRETS_SCAN_OMIT_KEYS = "PORT,HOST,MONGODB_DB_NAME,JWT_ALGORITHM,JWT_EXPIRATION_MINUTES,ALLOWED_ORIGINS,GOOGLE_CLIENT_ID,VITE_GOOGLE_CLIENT_ID"
 
-[functions]
-  directory = "../netlify/functions"
 
 
 # Redirects are handled by testaurant_ui/public/_redirects
