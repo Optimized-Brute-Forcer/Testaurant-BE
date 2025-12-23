@@ -24,3 +24,5 @@
   for = "/*"
   [headers.values]
     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    Cross-Origin-Resource-Policy = "cross-origin"
+    Referrer-Policy = "no-referrer-when-downgrade"
