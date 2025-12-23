@@ -1,0 +1,20 @@
+[build]
+  command = "cd testaurant_ui && npm install && npm run build"
+  publish = "testaurant_ui/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  directory = "testaurant_bff"
+  included_files = ["testaurant_bff/app/**"]
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/main/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
