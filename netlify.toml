@@ -8,7 +8,7 @@
   SECRETS_SCAN_OMIT_KEYS = "PORT,HOST,MONGODB_DB_NAME,JWT_ALGORITHM,JWT_EXPIRATION_MINUTES,ALLOWED_ORIGINS,GOOGLE_CLIENT_ID,VITE_GOOGLE_CLIENT_ID"
 
 [functions]
-  directory = "netlify/functions"
+  directory = "functions"
 
 
 # Redirects are handled by testaurant_ui/public/_redirects
