@@ -39,9 +39,7 @@ export default function Login() {
                             onError={() => {
                                 toast.error('Google login failed')
                             }}
-                            // Disabling oneTap temporarily to resolve (blocked:other) error
-                            // useOneTap
-                            // ux_mode="redirect"
+                            useOneTap
                             theme="filled_black"
                             shape="pill"
                             width="340"
