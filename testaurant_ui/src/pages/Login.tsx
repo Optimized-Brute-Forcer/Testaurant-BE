@@ -39,7 +39,7 @@ export default function Login() {
                             onError={() => {
                                 toast.error('Google login failed')
                             }}
-                            useOneTap
+                            // useOneTap (Disabled to resolve blocked:other on Netlify)
                             theme="filled_black"
                             shape="pill"
                             width="340"
