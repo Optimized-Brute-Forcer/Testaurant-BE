@@ -8,7 +8,7 @@
 
 [functions]
   directory = "testaurant_bff"
-  included_files = ["testaurant_bff/app/**"]
+  included_files = ["testaurant_bff/app/**", "testaurant_bff/*.py"]
 
 [[redirects]]
   from = "/api/*"
