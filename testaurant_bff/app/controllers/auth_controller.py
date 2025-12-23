@@ -13,6 +13,12 @@ from app.models.auth_models import TokenPayload
 router = APIRouter(prefix="/testaurant/v1/auth", tags=["Authentication"])
 
 
+@router.get("/health")
+async def health_check():
+    """Health check endpoint (no auth required)."""
+    return {"status": "healthy", "service": "testaurant"}
+
+
 @router.post("/login", response_model=LoginResponse)
 async def login(request: LoginRequest):
     """

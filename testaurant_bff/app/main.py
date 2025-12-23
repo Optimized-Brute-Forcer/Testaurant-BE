@@ -43,12 +43,6 @@ app.include_router(bff_controller.router)
 handler = Mangum(app)
 
 # Health check
-@app.get("/app/health")
-async def health_check():
-    """Health check endpoint."""
-    return {"status": "healthy", "service": "testaurant"}
-
-
 @app.get("/")
 async def root():
     """Root endpoint."""
