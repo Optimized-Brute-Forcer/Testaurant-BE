@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  SECRETS_SCAN_OMIT_KEYS = "PORT,HOST,MONGODB_DB_NAME,JWT_ALGORITHM,JWT_EXPIRATION_MINUTES,ALLOWED_ORIGINS"
 
 [functions]
   directory = "testaurant_bff"
