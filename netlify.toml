@@ -7,12 +7,11 @@
   SECRETS_SCAN_OMIT_KEYS = "PORT,HOST,MONGODB_DB_NAME,JWT_ALGORITHM,JWT_EXPIRATION_MINUTES,ALLOWED_ORIGINS,GOOGLE_CLIENT_ID,VITE_GOOGLE_CLIENT_ID"
 
 [functions]
-  directory = "testaurant_bff"
-  included_files = ["testaurant_bff/app/**", "testaurant_bff/*.py"]
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
+  to = "/.netlify/functions/v1/:splat"
   status = 200
 
 [[redirects]]
