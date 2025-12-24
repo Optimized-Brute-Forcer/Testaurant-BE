@@ -1,11 +1,12 @@
 [build]
   command = "pip install -r requirements.txt"
-  functions = "functions"
+  functions = "netlify/functions"
   publish = "."
 
 [functions]
+  # We zip the 'app' folder and requirements so the function can use them
   included_files = ["app/**/*", "requirements.txt", "runtime.txt", ".env"]
-
+  
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/app_handler"

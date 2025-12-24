@@ -2,9 +2,12 @@ import sys
 import os
 from pathlib import Path
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Calculate the path to the project root
+# file -> functions -> netlify -> ROOT
 current_file = Path(__file__).resolve()
-project_root = current_file.parent.parent 
+project_root = current_file.parents[2] 
+
+# Add root to sys.path so we can import 'app'
 sys.path.append(str(project_root))
 
 from app.main import app
