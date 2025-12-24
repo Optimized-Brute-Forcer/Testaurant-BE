@@ -14,3 +14,6 @@ __pycache__/
 serverless_functions/*
 !serverless_functions/app_handler.py
 !serverless_functions/__init__.py
+
+# Zipped Functions
+ready_functions/

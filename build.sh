@@ -21,8 +21,18 @@ mkdir -p $FUNCTIONS_DIR/app
 # Copy app code
 cp -r app/* $FUNCTIONS_DIR/app/
 
-# Copy .env if it exists (optional, Netlify usually handles env vars via UI, but good for completeness if needed)
+# Copy .env if it exists
 # cp .env $FUNCTIONS_DIR/ || true
 
-echo "Build complete. Contents of $FUNCTIONS_DIR:"
-ls -F $FUNCTIONS_DIR
+echo "Zipping function artifact..."
+# Create directory for the final zip
+mkdir -p ready_functions
+
+# Zip the contents of serverless_functions into app_handler.zip
+# We cd into the directory so the zip root is correct
+cd $FUNCTIONS_DIR
+zip -r ../ready_functions/app_handler.zip .
+cd ..
+
+echo "Build complete. Artifact: ready_functions/app_handler.zip"
+ls -l ready_functions/app_handler.zip

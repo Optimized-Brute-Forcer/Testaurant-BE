@@ -1,6 +1,6 @@
 [build]
   command = "bash build.sh"
-  functions = "serverless_functions"
+  functions = "ready_functions"
   publish = "public"
 
 [functions]
