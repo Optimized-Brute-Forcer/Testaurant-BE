@@ -24,6 +24,10 @@ cp -r app/* $FUNCTIONS_DIR/app/
 # Copy .env if it exists
 # cp .env $FUNCTIONS_DIR/ || true
 
+# Copy runtime.txt to specify Python version
+cp runtime.txt $FUNCTIONS_DIR/
+
+
 echo "Zipping function artifact..."
 # Create directory for the final zip
 mkdir -p ready_functions
