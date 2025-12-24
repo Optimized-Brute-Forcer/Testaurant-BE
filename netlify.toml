@@ -1,12 +1,11 @@
 [build]
-  command = "ls -R netlify && tree -L 3 && pip install -r requirements.txt"
+  command = "tree -L 3 && pip install -r requirements.txt"
   functions = "api"
   publish = "public"
 
 [functions]
-  # We zip the 'app' folder and requirements so the function can use them
-  included_files = ["api/**/*","app/**/*", "requirements.txt", "runtime.txt", ".env"]
-  
+  included_files = ["app/**/*", "requirements.txt", "runtime.txt", ".env"]
+
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/app_handler"
