@@ -31,16 +31,17 @@ cp requirements.txt $FUNCTIONS_DIR/
 # Remove bin directory which might contain conflicting binaries or confuse the scanner
 rm -rf $FUNCTIONS_DIR/bin
 
-echo "Zipping function artifact..."
-# Create directory for the final zip
-mkdir -p ready_functions
-rm -f ready_functions/app_handler.zip
+echo "Preparing function directory..."
+# Create directory for the final function
+# Netlify treats a subdirectory in 'functions' as a function if it contains a handler.
+# Function name = subdirectory name = app_handler
+OUTPUT_DIR="ready_functions/app_handler"
+# Clean up previous artifacts
+rm -rf ready_functions
+mkdir -p $OUTPUT_DIR
 
-# Zip the contents of serverless_functions into app_handler.zip
-# We cd into the directory so the zip root is correct
-cd $FUNCTIONS_DIR
-zip -r ../ready_functions/app_handler.zip .
-cd ..
+# Copy contents (dependencies + app code + runtime + requirements)
+cp -r $FUNCTIONS_DIR/* $OUTPUT_DIR/
 
-echo "Build complete. Artifact: ready_functions/app_handler.zip"
-ls -l ready_functions/app_handler.zip
+echo "Build complete. Artifact directory: $OUTPUT_DIR"
+ls -F $OUTPUT_DIR | head -n 10
