@@ -1,8 +1,6 @@
 [build]
-  # DEBUG COMMAND ADDED: ls -R
-  # This will print the file structure in the logs so we can see what Netlify sees.
-  command = "ls -R && pip install -r requirements.txt"
-  functions = "backend"
+  command = "pip install -r requirements.txt"
+  functions = "netlify/functions"
   publish = "public"
 
 [functions]
