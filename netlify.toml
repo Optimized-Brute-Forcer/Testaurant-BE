@@ -3,6 +3,9 @@
   functions = "ready_functions"
   publish = "public"
 
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
 
 
 [[redirects]]

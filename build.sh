@@ -25,22 +25,24 @@ cp -r app/* $FUNCTIONS_DIR/app/
 # cp .env $FUNCTIONS_DIR/ || true
 
 # Copy runtime.txt AND requirements.txt to specify Python version strongly
+# Copy runtime.txt AND requirements.txt
 cp runtime.txt $FUNCTIONS_DIR/
 cp requirements.txt $FUNCTIONS_DIR/
+# Create __init__.py to help detection
+touch $FUNCTIONS_DIR/__init__.py
 
-# Remove bin directory which might contain conflicting binaries or confuse the scanner
+# Remove bin directory
 rm -rf $FUNCTIONS_DIR/bin
 
-echo "Preparing function directory (FLAT)..."
-# Create directory for the final function
-# We use a FLAT structure because Netlify might not be scanning subdirectories for Python.
-OUTPUT_DIR="ready_functions"
-# Clean up previous artifacts
-rm -rf ready_functions
-mkdir -p $OUTPUT_DIR
+echo "Zipping function artifact..."
+# Create directory for the final zip
+mkdir -p ready_functions
+rm -f ready_functions/app_handler.zip
 
-# Copy contents (dependencies + app code + runtime + requirements) directly to root of ready_functions
-cp -r $FUNCTIONS_DIR/* $OUTPUT_DIR/
+# Zip the contents of serverless_functions into app_handler.zip
+cd $FUNCTIONS_DIR
+zip -r ../ready_functions/app_handler.zip .
+cd ..
 
-echo "Build complete. Artifact directory: $OUTPUT_DIR"
-ls -F $OUTPUT_DIR | head -n 10
+echo "Build complete. Artifact: ready_functions/app_handler.zip"
+ls -l ready_functions/app_handler.zip
