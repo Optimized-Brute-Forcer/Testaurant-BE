@@ -1,5 +1,5 @@
 [build]
-  command = "pip install -r requirements.txt"
+  command = "ls -R netlify && pip install -r requirements.txt"
   functions = "netlify/functions"
   publish = "."
 
