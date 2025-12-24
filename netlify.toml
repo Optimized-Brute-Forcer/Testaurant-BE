@@ -1,14 +1,12 @@
 [build]
   functions = "netlify/functions"
-  publish = "."  # Optional, but keeps the root as publish dir
+  publish = "."
 
 [functions]
-  # CRITICAL: This ensures your 'app' folder is zipped along with the function
-  included_files = ["app/**/*", "requirements.txt", "runtime.txt", ".env"] 
+  included_files = ["app/**/*", "requirements.txt", "runtime.txt", ".env"]
+  node_bundler = "esbuild" 
 
 [[redirects]]
-  # Redirect ALL traffic to FastAPI, not just /api/*
-  # This fixes /docs, /openapi.json, and root access
   from = "/*"
   to = "/.netlify/functions/app_handler"
   status = 200
