@@ -4,7 +4,6 @@
   publish = "public"
 
 [functions]
-  external_node_modules = []
   included_files = ["app/**/*", "requirements.txt", "runtime.txt", ".env"]
 
 [[redirects]]
