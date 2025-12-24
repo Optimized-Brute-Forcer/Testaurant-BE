@@ -31,16 +31,15 @@ cp requirements.txt $FUNCTIONS_DIR/
 # Remove bin directory which might contain conflicting binaries or confuse the scanner
 rm -rf $FUNCTIONS_DIR/bin
 
-echo "Preparing function directory..."
+echo "Preparing function directory (FLAT)..."
 # Create directory for the final function
-# Netlify treats a subdirectory in 'functions' as a function if it contains a handler.
-# Function name = subdirectory name = app_handler
-OUTPUT_DIR="ready_functions/app_handler"
+# We use a FLAT structure because Netlify might not be scanning subdirectories for Python.
+OUTPUT_DIR="ready_functions"
 # Clean up previous artifacts
 rm -rf ready_functions
 mkdir -p $OUTPUT_DIR
 
-# Copy contents (dependencies + app code + runtime + requirements)
+# Copy contents (dependencies + app code + runtime + requirements) directly to root of ready_functions
 cp -r $FUNCTIONS_DIR/* $OUTPUT_DIR/
 
 echo "Build complete. Artifact directory: $OUTPUT_DIR"
