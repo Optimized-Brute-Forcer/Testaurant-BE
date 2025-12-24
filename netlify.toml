@@ -1,6 +1,6 @@
 [build]
   command = "tree -L 3 && pip install -r requirements.txt"
-  functions = "api"
+  functions = "netlify/functions"
   publish = "public"
 
 [functions]

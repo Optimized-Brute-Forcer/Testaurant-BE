@@ -2,10 +2,9 @@ import sys
 import os
 from pathlib import Path
 
-# CHANGED: We are now in 'api/', so the project root is just the parent directory.
-# (Previously it was .parents[2])
+# Adjust path: file is in netlify/functions/ so root is 2 levels up
 current_file = Path(__file__).resolve()
-project_root = current_file.parent.parent 
+project_root = current_file.parents[2] 
 sys.path.append(str(project_root))
 
 from app.main import app
