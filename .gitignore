@@ -17,3 +17,6 @@ serverless_functions/*
 
 # Zipped Functions
 ready_functions/
+
+# Unzipped Functions 
+ready_functions/app_handler

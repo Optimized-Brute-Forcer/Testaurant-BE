@@ -24,13 +24,17 @@ cp -r app/* $FUNCTIONS_DIR/app/
 # Copy .env if it exists
 # cp .env $FUNCTIONS_DIR/ || true
 
-# Copy runtime.txt to specify Python version
+# Copy runtime.txt AND requirements.txt to specify Python version strongly
 cp runtime.txt $FUNCTIONS_DIR/
+cp requirements.txt $FUNCTIONS_DIR/
 
+# Remove bin directory which might contain conflicting binaries or confuse the scanner
+rm -rf $FUNCTIONS_DIR/bin
 
 echo "Zipping function artifact..."
 # Create directory for the final zip
 mkdir -p ready_functions
+rm -f ready_functions/app_handler.zip
 
 # Zip the contents of serverless_functions into app_handler.zip
 # We cd into the directory so the zip root is correct
