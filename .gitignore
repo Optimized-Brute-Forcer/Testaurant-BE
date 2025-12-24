@@ -9,3 +9,8 @@ __pycache__/
 
 # Env
 .env
+
+# Serverless Functions Build Artifacts
+serverless_functions/*
+!serverless_functions/app_handler.py
+!serverless_functions/__init__.py
