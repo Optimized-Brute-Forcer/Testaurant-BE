@@ -3,8 +3,7 @@
   functions = "ready_functions"
   publish = "public"
 
-[functions]
-  external_node_modules = []
+
 
 [[redirects]]
   from = "/*"
