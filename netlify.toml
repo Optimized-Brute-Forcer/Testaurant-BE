@@ -5,7 +5,6 @@
 
 [functions]
   included_files = ["app/**/*", "requirements.txt", "runtime.txt", ".env"]
-  node_bundler = "esbuild" 
 
 [[redirects]]
   from = "/*"

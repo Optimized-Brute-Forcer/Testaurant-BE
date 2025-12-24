@@ -2,7 +2,7 @@ import sys
 import os
 from pathlib import Path
 
-# Adjust path: The root is now just 1 level up (parent), not 2
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 current_file = Path(__file__).resolve()
 project_root = current_file.parent.parent 
 sys.path.append(str(project_root))
