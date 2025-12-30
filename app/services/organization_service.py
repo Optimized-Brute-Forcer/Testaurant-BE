@@ -235,7 +235,7 @@ class OrganizationService:
             # Grant membership immediately
             membership = {
                 "organization_id": organization_id,
-                "role": role.value
+                "role": "ORG_ADMIN"
             }
             await db.users.update_one(
                 {"user_id": user_id},
@@ -243,7 +243,7 @@ class OrganizationService:
                     "$push": {"organizations": membership},
                     "$set": {
                         "organization_id": organization_id,
-                        "role": role.value
+                        "role": "ORG_ADMIN"
                     }
                 }
             )
