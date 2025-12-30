@@ -298,3 +298,7 @@ If you encounter any issues:
 ---
 
 **Happy Testing! 🧪**
+
+chmod 400 ~/Downloads/key.pem
+ls -l ~/Downloads/key.pem
+ssh -i ~/Downloads/key.pem ec2-user@51.20.37.236

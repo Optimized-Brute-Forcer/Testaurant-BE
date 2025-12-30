@@ -6,17 +6,10 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+venv/
+*.egg-info/
+dist/
+build/
 
-# Env
+# Environment
 .env
-
-# Serverless Functions Build Artifacts
-serverless_functions/*
-!serverless_functions/app_handler.py
-!serverless_functions/__init__.py
-
-# Zipped Functions
-ready_functions/
-
-# Unzipped Functions 
-ready_functions/app_handler
