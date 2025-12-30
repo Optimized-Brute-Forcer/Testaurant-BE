@@ -6,6 +6,11 @@ from app.config import settings
 from app.database import Database
 from app.controllers import auth_controller, organization_controller, bff_controller
 from mangum import Mangum
+import markdown
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from fastapi import Request
+import os
 
 
 @asynccontextmanager
@@ -42,6 +47,9 @@ app.include_router(bff_controller.router)
 # Mangum handler for serverless deployment (Netlify/Lambda)
 handler = Mangum(app)
 
+# Templates
+templates = Jinja2Templates(directory="app/templates")
+
 # Health check
 @app.get("/")
 async def root():
@@ -49,8 +57,24 @@ async def root():
     return {
         "message": "Welcome to Testaurant API",
         "docs": "/docs",
-        "health": "/app/health"
+        "health": "/app/health",
+        "lld": "/lld"
     }
+
+@app.get("/lld", response_class=HTMLResponse)
+async def get_lld(request: Request):
+    """Serve LLD documentation."""
+    lld_path = "app/docs/lld.md"
+    if not os.path.exists(lld_path):
+        return "LLD documentation not found."
+    
+    with open(lld_path, "r") as f:
+        content = f.read()
+    
+    # Convert markdown to HTML
+    html_content = markdown.markdown(content, extensions=['extra', 'codehilite', 'tables'])
+    
+    return templates.TemplateResponse("lld.html", {"request": request, "content": html_content})
 
 
 if __name__ == "__main__":
