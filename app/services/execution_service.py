@@ -253,3 +253,62 @@ class ExecutionService:
         )
 
         return audit
+
+    @staticmethod
+    async def run_testsuite(
+        organization_id: str,
+        testsuite_id: str,
+        environment: Environment,
+        user_id: str
+    ) -> RunTestsuiteAudit:
+        """Run a testsuite (sequence of testcases)."""
+        db = get_database()
+        testsuite = await TestsuiteService.get_testsuite(testsuite_id, organization_id)
+        if not testsuite:
+            raise Exception("Testsuite not found")
+
+        run_id = await get_next_run_testsuite_id()
+        start_time = datetime.utcnow()
+        results: List[RunTestcaseAudit] = []
+        overall_status = ExecutionStatus.PASSED
+
+        for tc_id in testsuite.testcase_ids:
+            # Execute testcase
+            tc_audit = await ExecutionService.run_testcase(
+                organization_id, tc_id, environment, user_id
+            )
+            
+            results.append(tc_audit)
+
+            if tc_audit.overall_status == ExecutionStatus.FAILED:
+                overall_status = ExecutionStatus.FAILED
+
+        end_time = datetime.utcnow()
+        audit = RunTestsuiteAudit(
+            run_testsuite_id=run_id,
+            organization_id=organization_id,
+            testsuite_id=testsuite_id,
+            testsuite_title=testsuite.name,
+            environment=environment,
+            overall_status=overall_status,
+            testcase_results=results,
+            run_testsuite_created_date=start_time,
+            run_testsuite_start_time=start_time,
+            run_testsuite_end_time=end_time,
+            executor_context=user_id
+        )
+
+        await db.run_testsuite_audit.insert_one(audit.model_dump())
+        
+        # Update testsuite with last run info
+        await db.testsuite_master.update_one(
+            {"testsuite_id": testsuite_id, "organization_id": organization_id},
+            {"$set": {
+                "last_ran_at": end_time,
+                "last_ran_by": user_id,
+                "last_run_status": overall_status,
+                "last_run_id": run_id
+            }}
+        )
+
+        return audit
