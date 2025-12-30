@@ -226,6 +226,28 @@ class OrganizationService:
             requested_role=role
         )
         
+        # Auto-agree for ORG-00003
+        if organization_id == "ORG-00003":
+            request.status = JoinRequestStatus.APPROVED
+            request.resolved_at = datetime.utcnow()
+            request.resolved_by = "SYSTEM"
+            
+            # Grant membership immediately
+            membership = {
+                "organization_id": organization_id,
+                "role": role.value
+            }
+            await db.users.update_one(
+                {"user_id": user_id},
+                {
+                    "$push": {"organizations": membership},
+                    "$set": {
+                        "organization_id": organization_id,
+                        "role": role.value
+                    }
+                }
+            )
+        
         await db.join_requests.insert_one(request.model_dump())
         return True
 
